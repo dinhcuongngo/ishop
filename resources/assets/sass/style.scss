@@ -1,0 +1,239 @@
+/*=============COMMON=============*/
+*{
+	box-sizing: border-box;
+}
+body{
+	font-family: 'Roboto', sans-serif;
+}
+a {
+	text-decoration: none;
+}
+%cl-white{
+	color: #ffffff;
+}
+%bgcl-blue{
+	background-color: #008ae6;
+}
+@mixin border_radius($value){
+	border-radius: $value;
+	-webkit-border-radius: $value;
+	-moz-border-radius: $value;
+}
+.container{
+	width: 80%;
+	margin: 0 auto;
+}
+.clearfix::after, .clearfix::before{
+	content: "";
+	display: table;
+}
+.clearfix::after{
+	clear: both;
+}
+.btn{
+	padding: 5px 10px;
+	margin: 0 5px;
+	color: #ffffff;
+	@include border_radius(3px);
+}
+.btnUpdate{
+	background-color: #0099ff;
+	border: 1px solid #006bb3;
+}
+.btnDelete{
+	background-color: #ff704d;
+	border: 1px solid #ff3300;
+}
+.btnReset{
+	background-color: #00b33c;
+	border: 1px solid #006622;
+}
+
+/*=============HEADER=============*/
+.header{
+	width: 100%; 
+	display: block;
+	position: relative;
+	@extend %bgcl-blue;
+	padding: 15px 0;
+	&__left{
+		float: left;
+		&_logo{
+			line-height: 200%;
+			@extend %cl-white;
+		}
+	}
+	&__right{
+		float: right;
+		&_menu{
+			ul{
+				margin: 0;
+				padding: 0;
+				li{
+					list-style: none;
+					display: inline-block;
+					margin-left: 20px;
+					a{
+						@extend %cl-white;
+						line-height: 200%;
+					}
+					a:hover{
+						border-bottom: 1px solid #ffffff;
+					}
+				}
+			}
+		}
+	}	
+}
+
+/*=============BODY=============*/
+.body{
+	width: 100%;
+	display: block;
+	position: relative;
+	min-height: 500px;
+	.form_content{
+		width: 50%;
+		margin: 20px auto;
+		border: 1px solid #d9d9d9;
+		@include border_radius(3px);
+		p.form_title{
+			display: block;
+			width: 100%;
+			background-color: #cccccc;
+			padding: 10px 20px;
+			margin: 0;
+			font-weight: bold;
+		}
+		form{
+			display: table;
+			width: 100%;
+			padding:20px;
+			div{
+				display: table-row;
+				label, input, button{
+					display: table-cell;
+					
+				}
+				input[type="text"], input[type="password"]{
+					padding: 7px 15px;
+					margin: 5px 0;
+					width: 100%;
+				}
+				input[type="file"]{
+					margin: 5px 0;
+				}
+				input[type="file"]::-webkit-file-upload-button{
+					padding: 7px 10px;
+				}
+				button{
+					margin: 5px 0;
+					padding: 7px 15px;
+				}
+			}
+		}
+	}
+	.list_content{
+		width: 100%;
+		display: table;
+		&_row{
+			display: table-row;
+			text-align: center;
+
+			&_col{
+				display: table-cell;
+				padding: 10px 0;
+			}
+		}
+		&_row:first-child{
+			font-weight: bold;
+		}
+		&_row:nth-child(odd){
+			background-color: #ffffff;
+		}
+		&_row:nth-child(even){	
+			background-color: #f2f2f2;
+		}
+		&_row:hover{
+			background-color: #e6e6e6;
+		}
+	}
+}
+
+/*=============FOOTER=============*/
+.footer{
+	width: 100%;
+	display: block;
+	position: relative;
+	border-top: 2px solid #004d80;
+	color: #595959;
+	line-height: 200%;
+	&__left{
+		float: left;
+	}
+	&__right{
+		float: right;
+		ul{
+			margin: 0; padding: 0;
+			li{
+				list-style: none;
+				display: inline-block;
+				margin-left: 10px;
+				a{
+					color: #595959;
+				}
+			}
+		}
+	}
+}
+
+/*=============RWD=============*/
+$res_320: "only screen and (min-width: 320px) and (max-width: 374px)";
+$res_375: "only screen and (min-width: 375px) and (max-width: 424px)";
+$res_425: "only screen and (min-width: 425px) and (max-width: 767px)";
+$res_768: "only screen and (min-width: 768px) and (max-width: 991px)";
+$res_992: "only screen and (min-width: 992px) and (max-width: 1023px)";
+$res_1024: "only screen and (min-width: 1024px) and (max-width: 1199px)";
+$res_1200: "only screen and (min-width: 1200px)";
+
+@mixin responsive_320(){
+	@media #{$res_320} {
+		@content;
+	}
+}
+
+@mixin responsive_375(){
+	@media #{$res_375} {
+		@content;
+	}
+}
+
+@mixin responsive_425(){
+	@media #{$res_425} {
+		@content;
+	}
+}
+
+@mixin responsive_768(){
+	@media #{$res_768} {
+		@content;
+	}
+}
+
+@mixin responsive_992(){
+	@media #{$res_992} {
+		@content;
+	}
+}
+
+@mixin responsive_1024(){
+	@media #{$res_1024} {
+		@content;
+	}
+}
+
+@mixin responsive_1200(){
+	@media #{$res_1200} {
+		@content;
+	}
+}
