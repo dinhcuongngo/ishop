@@ -36,3 +36,6 @@ Route::put('users/{id}/change', 'User\UserController@changePassword');
 
 //======CATEGORY======\\
 Route::resource('categories','Category\CategoryController',['except'=>['create','edit']]);
+
+//======SHOP======\\
+Route::resource('shops','Shop\ShopController',['except'=>['create','edit']]);
