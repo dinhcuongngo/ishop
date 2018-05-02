@@ -108,6 +108,7 @@ a {
 	display: block;
 	position: relative;
 	min-height: 500px;
+	padding: 50px 0;
 	.form_content{
 		width: 50%;
 		margin: 20px auto;
@@ -159,6 +160,12 @@ a {
 			&_col{
 				display: table-cell;
 				padding: 10px 0;
+				a{
+					display: inline-block;
+				}
+				form{
+					display: inline-block;
+				}
 			}
 		}
 		&_row:first-child{

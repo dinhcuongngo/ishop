@@ -35,10 +35,14 @@
                     <span>{{ $user->email }}</span>
                 </div>
                 <div class="list_content_row_col">
-                    <a href="/users/{{ $user->id }}" class="btn btnUpdate"><i class="far fa-edit"></i></a>
-                    <a href="/users/{{ $user->id }}/change" class="btn btnChange"><i class="fas fa-key"></i></a>
-                    <a href="/users/{{ $user->id }}" class="btn btnReset"><i class="fas fa-sync-alt"></i></a>
-                    <a href="/users/{{ $user->id }}" class="btn btnDelete"><i class="far fa-trash-alt"></i></a>
+                    <a href="/users/{{ $user->id }}" class="btn btnUpdate" title="Update Profile"><i class="far fa-edit"></i></a>
+                    <a href="/users/{{ $user->id }}/change" class="btn btnChange" title="Change Password"><i class="fas fa-key"></i></a>
+                    <a href="/users/{{ $user->id }}" class="btn btnReset" title="Reset Account"><i class="fas fa-sync-alt"></i></a>
+                    <form action="/users/{{ $user->id }}" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btnDelete"><i class="far fa-trash-alt"></i></button>
+                    </form>
                 </div>
             </div>
             @endforeach
