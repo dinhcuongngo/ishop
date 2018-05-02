@@ -7,6 +7,7 @@ use App\Respositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -70,9 +71,13 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        //dd($user);
+
         $user->fill($request->only([
             'name', 'email', 'photo'
         ]));
+
+
         if($request->file('photo') != ""){
 
             if($user->photo != ""){
@@ -93,6 +98,47 @@ class UserController extends Controller
 
         return back()->with('success','Successfully updated!');
 
+    }
+
+    public function viewChangePassword($id)
+    {
+        return view('users.change',['id'=>$id]);
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $rules  = [
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ];
+
+        $msg    = [
+            'current_password.required' => 'The current password is required.',
+            'password.required' => 'The new password is required.',
+            'password.confirmed' => 'These passwords are not matched.',
+            'password.min' => 'The password is at least 6 characters.',
+        ];
+
+        $this->validate($request, $rules, $msg);
+        
+        $user = $this->userRepository->findUserById($id);
+
+        // dd($user);
+
+        // dd($request->current_password, $user->password);
+
+        if(Hash::check($request->current_password, $user->password))
+        {
+            // dd("Check passwords");
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            return back()->with('success','Successfully changed password.');
+        }
+        else
+        {
+            return back()->withErrors('Authenication is failed!');
+        }
     }
 
     public function destroy(User $user)

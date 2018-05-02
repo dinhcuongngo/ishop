@@ -19,11 +19,17 @@ Route::get('/home',function(){
 })->middleware('auth');
 
 //======USERS======\\
+Route::resource('users','User\UserController',['except'=>['create','edit']])->middleware('admin');
+
+//-----------------Signup
 Route::get('signup', 'User\CommonUserController@viewSignup')->name('signup');
 Route::post('signup', 'User\CommonUserController@signUp');
-//-----------------
+
+//-----------------Signin & Logout
 Route::get('signin', 'User\CommonUserController@viewSignin')->name('login');
 Route::post('signin', 'User\CommonUserController@signIn');
 Route::get('logout', 'User\CommonUserController@logOut');
-//-----------------
-Route::resource('users','User\UserController',['except'=>['create','edit']])->middleware('admin');
+
+//-----------------Change Password 
+Route::get('users/{id}/change', 'User\UserController@viewChangePassword');
+Route::put('users/{id}/change', 'User\UserController@changePassword');
