@@ -36,8 +36,9 @@
                 </div>
                 <div class="list_content_row_col">
                     <a href="/users/{{ $user->id }}" class="btn btnUpdate"><i class="far fa-edit"></i></a>
-                    <a href="/users/{{ $user->id }}" class="btn btnDelete"><i class="far fa-trash-alt"></i></a>
+                    <a href="/users/{{ $user->id }}" class="btn btnChange"><i class="fas fa-key"></i></a>
                     <a href="/users/{{ $user->id }}" class="btn btnReset"><i class="fas fa-sync-alt"></i></a>
+                    <a href="/users/{{ $user->id }}" class="btn btnDelete"><i class="far fa-trash-alt"></i></a>
                 </div>
             </div>
             @endforeach

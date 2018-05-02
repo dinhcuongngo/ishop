@@ -48,6 +48,10 @@ a {
 	background-color: #00b33c;
 	border: 1px solid #006622;
 }
+.btnChange{
+	background-color: #ff944d;
+	border: 1px solid #ff6600;
+}
 .msg-errors{
 	color: #ff0000;
 	margin: 20px;
@@ -55,6 +59,11 @@ a {
 .msg-success{
 	color: #009933;
 	margin: 20px;
+}
+.photo-thumb{
+	width: 200px;
+	height: 200px; 
+	object-fit: contain;
 }
 /*=============HEADER=============*/
 .header{

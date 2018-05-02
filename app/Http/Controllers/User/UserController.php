@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Respositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function __construct()
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('auth');
         $this->middleware('admin');
+        $this->userRepository = $userRepository;
     }
     public function index()
     {
-        //
-        $users = User::all();
+        
+        $users = $this->userRepository->listAllUsers();
 
         return view('users.users',['users'=>$users]);
 
@@ -59,11 +64,35 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+        // dd($user);
+        return view('users.edit',['user'=>$user]);  
     }
 
     public function update(Request $request, User $user)
     {
-        //
+        $user->fill($request->only([
+            'name', 'email', 'photo'
+        ]));
+        if($request->file('photo') != ""){
+
+            if($user->photo != ""){
+                $user->photo = $request->file('photo')->store('images');
+            }
+            
+        }
+        
+        
+        if($user->isClean())
+        {
+            return back()->withErrors('You need to specify the different value to update.');
+        }
+
+
+        $user->save();
+        
+
+        return back()->with('success','Successfully updated!');
+
     }
 
     public function destroy(User $user)
@@ -71,10 +100,4 @@ class UserController extends Controller
         //
     }
 
-    public function logOut()
-    {
-        Auth::logout();
-
-        return redirect()->route('welcome');
-    }
 }

@@ -106,4 +106,12 @@ class CommonUserController extends Controller
             return back()->with('fail','Login failed!');
         }
     }
+
+    public function logOut()
+    {
+        // dd("logout");
+        Auth::logout();
+
+        return redirect()->route('welcome');
+    }
 }
