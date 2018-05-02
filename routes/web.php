@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//======USERS
+Route::get('/signup', 'User\CommonUserController@viewSignup')->name('signup');
+Route::post('/signup', 'User\CommonUserController@signUp');
+Route::resource('users','User\UserController',['except'=>['create','edit']]);

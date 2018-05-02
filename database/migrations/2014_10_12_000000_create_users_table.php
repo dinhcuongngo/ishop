@@ -20,15 +20,18 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('verified')->default(User::UNVERIFIED_USER);
             $table->string('verification_token');
             $table->string('admin')->default(User::REGULAR_USER);
-            $table->string('role');
+            $table->string('role')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
+
+        //=>set id start from 10000
+        DB::statement("ALTER TABLE users AUTO_INCREMENT = 10000;");
     }
 
     /**

@@ -31,6 +31,8 @@ class User extends Authenticatable
         'photo',
         'admin',
         'role',
+        'verified',
+        'verification_token',
     ];
 
     protected $hidden = [
@@ -47,7 +49,7 @@ class User extends Authenticatable
         return $this->User::VERIFIED_USER;
     }
 
-    public function generateVerificationCode()
+    public static function generateVerificationCode()
     {
         return str_random(20);
     }

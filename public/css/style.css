@@ -45,6 +45,13 @@ a {
   background-color: #00b33c;
   border: 1px solid #006622; }
 
+.msg-errors {
+  color: #ff0000; }
+
+.msg-success {
+  color: #009933;
+  margin: 20px; }
+
 /*=============HEADER=============*/
 .header {
   width: 100%;
