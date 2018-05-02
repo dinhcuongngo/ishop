@@ -28,7 +28,8 @@
                 <div class="list_content_row_col">
                     <span>{{ $user->id }}</span>
                 </div>
-                <div class="list_content_row_col">
+                <div class="list_content_row_col text-align-left">
+                    <img src="{{ asset('storage/'.$user->photo) }}" class="photo-thumb-sm">
                     <span>{{ $user->name }}</span>
                 </div>
                 <div class="list_content_row_col">

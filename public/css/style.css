@@ -62,6 +62,15 @@ a {
   height: 200px;
   object-fit: contain; }
 
+.text-align-left {
+  text-align: left; }
+
+.photo-thumb-sm {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  vertical-align: middle; }
+
 /*=============HEADER=============*/
 .header {
   width: 100%;
