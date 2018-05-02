@@ -11,7 +11,9 @@
 				<ul>
 					@if(Auth::check())
 						<li><a href="/home">Home</a></li>
-						<li><a href="/users">User</a></li>
+						@if(Auth::user()->admin === 'true')
+							<li><a href="/users">User</a></li>
+						@endif
 						<li><a href="/shops">Shop</a></li>
 						<li><a href="/categories">Category</a></li>
 						<li><a href="/products">Product</a></li>

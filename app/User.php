@@ -10,8 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
-    const ADMIN_USER    = 'admin';
-    const REGULAR_USER  = 'regular';
+    const ADMIN_USER    = 'true';
+    const REGULAR_USER  = 'false';
 
     const VERIFIED_USER     = 'verified';
     const UNVERIFIED_USER   = 'unverified_user';

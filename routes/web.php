@@ -26,4 +26,4 @@ Route::get('signin', 'User\CommonUserController@viewSignin')->name('login');
 Route::post('signin', 'User\CommonUserController@signIn');
 Route::get('logout', 'User\UserController@logOut');
 //-----------------
-Route::resource('users','User\UserController',['except'=>['create','edit']]);
+Route::resource('users','User\UserController',['except'=>['create','edit']])->middleware('admin');
