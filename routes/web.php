@@ -33,3 +33,6 @@ Route::get('logout', 'User\CommonUserController@logOut');
 //-----------------Change Password 
 Route::get('users/{id}/change', 'User\UserController@viewChangePassword');
 Route::put('users/{id}/change', 'User\UserController@changePassword');
+
+//======CATEGORY======\\
+Route::resource('categories','Category\CategoryController',['except'=>['create','edit']]);

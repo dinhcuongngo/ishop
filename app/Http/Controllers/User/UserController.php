@@ -34,7 +34,7 @@ class UserController extends Controller
         //
         $rules  = [
             'name' => 'required',
-            'email' => 'required|email|unique:users, email_address',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
         ];
         $msg    = [
@@ -56,9 +56,15 @@ class UserController extends Controller
         $user['verification_token'] = User::generateVerificationCode();
         $user['admin']    = User::REGULAR_USER;
 
+        if($request->has('photo'))
+        {
+            // dd($request->file('photo'));
+            $user['photo'] = $request->file('photo')->store('images');
+        }
+
         User::create($user);
 
-        return route('signup')->with('success','Successfully added new user.');
+        return back()->with('success','Successfully added new user.');
 
     }
 
