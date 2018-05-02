@@ -13,9 +13,17 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+Route::get('/home',function(){
+	return view('home');
+})->middleware('auth');
 
-//======USERS
-Route::get('/signup', 'User\CommonUserController@viewSignup')->name('signup');
-Route::post('/signup', 'User\CommonUserController@signUp');
+//======USERS======\\
+Route::get('signup', 'User\CommonUserController@viewSignup')->name('signup');
+Route::post('signup', 'User\CommonUserController@signUp');
+//-----------------
+Route::get('signin', 'User\CommonUserController@viewSignin')->name('login');
+Route::post('signin', 'User\CommonUserController@signIn');
+Route::get('logout', 'User\UserController@logOut');
+//-----------------
 Route::resource('users','User\UserController',['except'=>['create','edit']]);

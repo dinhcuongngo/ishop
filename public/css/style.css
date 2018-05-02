@@ -46,7 +46,8 @@ a {
   border: 1px solid #006622; }
 
 .msg-errors {
-  color: #ff0000; }
+  color: #ff0000;
+  margin: 20px; }
 
 .msg-success {
   color: #009933;

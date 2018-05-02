@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CommonUserController extends Controller
 {
@@ -70,5 +71,39 @@ class CommonUserController extends Controller
        User::create($data);
 
         return redirect()->route('signup')->with('success','Successfully signed up!');
+    }
+
+    public function viewSignin()
+    {
+        return view('users.signin');
+    }
+
+    public function signIn(Request $request)
+    {
+        $rules  = [
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
+        $msg    = [
+            'email.required' => 'The email is required.',
+            'email.email' => 'The syntax of email is not correct.',
+            'password.required' => 'The password is required.',
+        ];
+
+        $this->validate($request,$rules,$msg);
+
+        $credentials = $request->only([
+            'email',
+            'password'
+        ]);
+
+        if(Auth::attempt($credentials))
+        {
+            return redirect('home');
+        }
+        else
+        {
+            return back()->with('fail','Login failed!');
+        }
     }
 }

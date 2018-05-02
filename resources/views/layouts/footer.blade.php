@@ -1,13 +1,18 @@
 <footer class="footer">
 	<div class="container clearfix">
 		<div class="footer__left">
-			Designed by me
+			@if(Auth::check())
+				Designed by {{ Auth::user()->name }}
+			@else
+				Designed by ME
+			@endif			
 		</div>
 		<div class="footer__right">
+			@if(Auth::check())
 			<ul>
-				<li><a href="/signin">Signin</a></li>
-				<li><a href="/signup">Signup</a></li>
+				<li><a href="/logout">Logout</a></li>
 			</ul>
+			@endif
 		</div>
 	</div>
 </footer>
