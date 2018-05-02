@@ -25,7 +25,7 @@
                 <div class="list_content_row_col">
                     <span>{{ $category->id }}</span>
                 </div>
-                <div class="list_content_row_col text-align-left">
+                <div class="list_content_row_col">
                     <span>{{ $category->name }}</span>
                 </div>
                 <div class="list_content_row_col">

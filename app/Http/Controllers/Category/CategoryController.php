@@ -45,15 +45,31 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        return view('categories.edit',['category'=>$category]);
     }
 
     public function update(Request $request, Category $category)
     {
         //
+        $category->fill($request->only([
+            'name', 'description'
+        ]));
+
+        if($category->isClean())
+        {
+            return back()->withErrors('You need to specify different value for update.');
+        }
+
+        $category->save();
+
+        return back()->with('success','Successfully updated.');
     }
 
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+
+        return back();
     }
 }

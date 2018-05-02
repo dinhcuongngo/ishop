@@ -24,6 +24,9 @@ class CreateTransactionsTable extends Migration
             $table->foreign('customer_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
         });
+
+        //=>set id start from 10000
+        DB::statement("ALTER TABLE transactions AUTO_INCREMENT = 100000;");
     }
 
     /**

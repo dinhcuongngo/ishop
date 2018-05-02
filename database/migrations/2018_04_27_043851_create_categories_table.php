@@ -21,6 +21,9 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        //=>set id start from 10000
+        DB::statement("ALTER TABLE categories AUTO_INCREMENT = 1000;");
     }
 
     /**

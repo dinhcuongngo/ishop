@@ -66,7 +66,11 @@ class CommonUserController extends Controller
         $data['verification_token'] = User::generateVerificationCode();
         $data['password']   = bcrypt($request->password);
 
-        // dd($data);
+        if($request->has('photo'))
+        {
+            // dd($request->file('photo'));
+            $data['photo'] = $request->file('photo')->store('images');
+        }
 
        User::create($data);
 

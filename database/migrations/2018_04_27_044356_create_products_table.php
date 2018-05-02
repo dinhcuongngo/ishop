@@ -29,6 +29,9 @@ class CreateProductsTable extends Migration
 
             $table->foreign('shop_id')->references('id')->on('shops');
         });
+
+        //=>set id start from 10000
+        DB::statement("ALTER TABLE products AUTO_INCREMENT = 10000;");
     }
 
     /**

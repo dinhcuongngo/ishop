@@ -26,6 +26,9 @@ class CreateShopsTables extends Migration
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
         });
+
+        //=>set id start from 10000
+        DB::statement("ALTER TABLE shops AUTO_INCREMENT = 100;");
     }
 
     /**
