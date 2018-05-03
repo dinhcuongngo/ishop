@@ -7,20 +7,34 @@ use App\Respositories\ShopRepository;
 use App\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
-    protected $shopRepository;
+    // protected $shopRepository;
 
     public function __construct(ShopRepository $shopRepository)
     {
         $this->middleware('auth');
         $this->shopRepository = $shopRepository;
     }
-    public function index()
+    public function index(Shop $shop)
     {
+        // $data = $shop->select('shops.*', 'users.email')->join('users', 'users.id', '=', 'shops.user_id')->get();
+
+        // foreach ($data as $key => $shop) {
+        //     // echo $shop->user;
+        // }
+        // // dd($data);
         //
-        $shops = $this->shopRepository->listAllShop();
+        if(Auth::user()->admin == 'true')
+        {
+            $shops = $this->shopRepository->listAllShop();
+        }
+        else
+        {
+            $shops = $this->shopRepository->listShopByOwner();
+        }
 
         return view('shops.shops',['shops'=>$shops]);
     }
@@ -45,9 +59,12 @@ class ShopController extends Controller
 
         if($request->has('logo'))
         {
-            $shop['logo'] = $request->file('logo')->store('images');
+            $shop['logo']   = $request->file('logo')->store('images');
         }
-        $shop['user_id'] = Auth::user()->id;
+
+        $shop['user_id']    = Auth::user()->id;
+        $shop['status']     = Shop::INACTIVE_SHOP;     
+        
         Shop::create($shop);
 
         return back()->with('success','Successfully added.');
@@ -56,11 +73,45 @@ class ShopController extends Controller
     public function show(Shop $shop)
     {
         //
+        return view('shops.edit',['shop'=>$shop]);
     }
 
     public function update(Request $request, Shop $shop)
     {
         //
+        if($request->has('logo'))
+        {
+            Storage::delete($shop->logo);
+        }
+
+        $shop->fill($request->only([
+            'name', 
+            'description',
+            'logo',
+        ]));
+
+        if($shop->isClean())
+        {
+            return back()->withErrors('You need to specify the different value for update.');
+        }
+
+        
+        $shop->logo = $request->file('logo')->store('images');
+
+        $shop->save();
+
+        return back()->with('success','Successfully updated.');
+    }
+
+    public function setStatus($id, $status)
+    {
+        $shop = $this->shopRepository->findShopById($id);
+
+        $shop->status = $status;
+
+        $shop->save();
+
+        return back();
     }
 
     public function destroy(Shop $shop)

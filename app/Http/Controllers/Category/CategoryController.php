@@ -18,6 +18,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
+        // dd($category);
         //
         $categories = $this->categoryRepository->listAllCategories();
 

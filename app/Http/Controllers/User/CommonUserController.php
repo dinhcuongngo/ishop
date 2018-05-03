@@ -72,7 +72,7 @@ class CommonUserController extends Controller
             $data['photo'] = $request->file('photo')->store('images');
         }
 
-       User::create($data);
+        User::create($data);
 
         return redirect()->route('signup')->with('success','Successfully signed up!');
     }

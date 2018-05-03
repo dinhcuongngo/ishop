@@ -39,3 +39,7 @@ Route::resource('categories','Category\CategoryController',['except'=>['create',
 
 //======SHOP======\\
 Route::resource('shops','Shop\ShopController',['except'=>['create','edit']]);
+Route::get('shops/{id}/status/{status}','Shop\ShopController@setStatus');
+
+//======PRODUCT======\\
+Route::resource('products','Product\ProductController',['except'=>['create','edit']]);

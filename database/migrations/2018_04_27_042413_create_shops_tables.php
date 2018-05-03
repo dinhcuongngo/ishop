@@ -21,7 +21,7 @@ class CreateShopsTables extends Migration
             $table->string('description');
             $table->string('logo');
             $table->unsignedInteger('user_id');
-            $table->string('status')->default(Shop::UNAVAILABLE_SHOP);
+            $table->string('status')->default(Shop::INACTIVE_SHOP);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');

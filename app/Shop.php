@@ -11,8 +11,8 @@ class Shop extends Model
     //
 	use SoftDeletes;
 
-	const AVAILABLE_SHOP = 'available';
-	const UNAVAILABLE_SHOP = 'unavailable';
+	const ACTIVE_SHOP = 'active';
+	const INACTIVE_SHOP = 'inactive';
 
     protected $table = 'shops';
 
@@ -25,7 +25,7 @@ class Shop extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function users()
+    public function user()
     {
     	return $this->belongsTo(User::class);
     }

@@ -8,6 +8,9 @@
                     <span>ID</span>
                 </div>
                 <div class="list_content_row_col">
+                    <span></span>
+                </div>
+                <div class="list_content_row_col text-align-left">
                     <span>Name</span>
                 </div>
                 <div class="list_content_row_col">
@@ -26,15 +29,23 @@
                     <span>{{ $shop->id }}</span>
                 </div>
                 <div class="list_content_row_col">
+                    @if( $shop->status == 'inactive')
+                        <i class="fas fa-lock"></i>
+                    @else
+                        <i class="fas fa-lock-open"></i>
+                    @endif
+                </div>
+                <div class="list_content_row_col text-align-left">
+                    <img src="{{ asset('storage/'.$shop->logo) }}" class="photo-thumb-sm">
                     <span>{{ $shop->name }}</span>
                 </div>
                 <div class="list_content_row_col">
                     <a href="/shops/{{ $shop->id }}" class="btn btnUpdate" title="Update Profile"><i class="far fa-edit"></i></a>
-                    <form action="/shops/{{ $shop->id }}" method="POST">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btnDelete"><i class="far fa-trash-alt"></i></button>
-                    </form>
+                    @if( $shop->status == 'inactive')
+                        <a href="/shops/{{ $shop->id }}/status/active" class="btn btnReset" title="Active"><i class="fas fa-lock-open"></i></a>
+                    @else
+                        <a href="/shops/{{ $shop->id }}/status/inactive" class="btn btnDelete" title="Inactive"><i class="fas fa-lock"></i></a>
+                    @endif
                 </div>
             </div>
             @endforeach
