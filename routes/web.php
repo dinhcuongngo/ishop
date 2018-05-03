@@ -43,3 +43,4 @@ Route::get('shops/{id}/status/{status}','Shop\ShopController@setStatus');
 
 //======PRODUCT======\\
 Route::resource('products','Product\ProductController',['except'=>['create','edit']]);
+Route::get('product/{id}/status/{status}','Product\ProductController@setStatus');

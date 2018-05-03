@@ -32,7 +32,7 @@
                     @if( $shop->status == 'inactive')
                         <i class="fas fa-lock"></i>
                     @else
-                        <i class="fas fa-lock-open"></i>
+                        <i class="fas fa-lock-open light-on"></i>
                     @endif
                 </div>
                 <div class="list_content_row_col text-align-left">

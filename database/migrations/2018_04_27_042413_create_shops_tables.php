@@ -19,7 +19,7 @@ class CreateShopsTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->unsignedInteger('user_id');
             $table->string('status')->default(Shop::INACTIVE_SHOP);
             $table->timestamps();
