@@ -19,6 +19,7 @@
             </div>
             @php 
                 $i = 1;
+                $shops = $shops->where('name', 'Stark Inc');
             @endphp
             @foreach($shops as $shop)
             <div class="list_content_row">

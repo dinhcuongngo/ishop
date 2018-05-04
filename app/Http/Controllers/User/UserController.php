@@ -20,13 +20,12 @@ class UserController extends Controller
         $this->middleware('admin');
         $this->userRepository = $userRepository;
     }
-    public function index()
+    
+    public function index(Request $request)
     {
-        
-        $users = $this->userRepository->listAllUsers();
+        $users = $this->userRepository->searchUser($request->name, $request->email, $request->admin, $request->role);
 
         return view('users.users',['users'=>$users]);
-
     }
 
     public function store(Request $request)
@@ -154,5 +153,16 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function searchUsers($name, $email, $admin, $role)
+    {
+        dd($request->name);
+        $users = $this->userRepository->searchUser($request->name, $request->email, $request->admin, $request->role);
+        // dd($users);
+        // $users->withPath('/userSearch');
+
+        // return view('users.users', compact('users'));
+        return redirect('users')->withInput([$users]);
+    }   
 
 }
