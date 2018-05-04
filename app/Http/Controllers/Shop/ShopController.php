@@ -18,7 +18,7 @@ class ShopController extends Controller
         $this->middleware('auth');
         $this->shopRepository = $shopRepository;
     }
-    public function index(Shop $shop)
+    public function index(Request $request)
     {
         // $data = $shop->select('shops.*', 'users.email')->join('users', 'users.id', '=', 'shops.user_id')->get();
 
@@ -27,9 +27,10 @@ class ShopController extends Controller
         // }
         // // dd($data);
         //
+
         if(Auth::user()->admin == 'true')
         {
-            $shops = $this->shopRepository->listAllShop();
+            $shops = $this->shopRepository->searchShop($request->name, $request->status);
         }
         else
         {

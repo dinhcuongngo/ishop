@@ -1,4 +1,22 @@
+        <div class="list_content">
+            <form action="shops" method="GET" class="search-form">
+                <div>
+                    <input type="text" name="name" placeholder="Name">
+                </div>
+                <div>
+                    <select name="status">
+                        <option value="">Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="btnSubmit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </form>
+        </div>
 @if(count($shops) > 0)
+        <p>Number of shops: {{ count($shops) }}</p>
         <div class="list_content">
             <div class="list_content_row">
                 <div class="list_content_row_col">
@@ -19,7 +37,6 @@
             </div>
             @php 
                 $i = 1;
-                $shops = $shops->where('name', 'Stark Inc');
             @endphp
             @foreach($shops as $shop)
             <div class="list_content_row">

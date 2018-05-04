@@ -38,4 +38,18 @@ class ShopRepository
 	{
 		return Shop::find($id);
 	}
+
+	public function searchShop($name, $status)
+	{
+		$shops = Shop::where(function ($query) use($name, $status){
+					if(isset($name)) $query = $query->where('name', 'LIKE', '%'.$name.'%');
+					if(isset($status)) $query = $query->where('status', $status);
+
+					return $query;
+		})->paginate(15);
+
+		// dd($shops);
+
+		return $shops;
+	}
 }

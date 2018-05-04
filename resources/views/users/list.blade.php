@@ -18,7 +18,7 @@
                     </select>
                 </div>
                 <div>
-                    <button type="submit" class="btnSubmit">Search</button>
+                    <button type="submit" class="btnSubmit"><i class="fas fa-search"></i> Search</button>
                 </div>
             </form>
         </div>

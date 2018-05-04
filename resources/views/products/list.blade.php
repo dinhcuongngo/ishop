@@ -1,3 +1,26 @@
+        <div class="list_content">
+            <form action="products" method="GET" class="search-form">
+                <div>
+                    <input type="text" name="name" placeholder="Name">
+                </div>
+                <div>
+                    <select name="shop">
+                        <option value="">Shop</option>
+                        @foreach($shops as $shop)
+                            <option value="{{ $shop->id }}">{{ $shop->name }}</option>
+                        @endforeach
+                    </select>
+                    <select name="status">
+                        <option value="">Status</option>
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="btnSubmit"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </form>
+        </div>
 @if(count($products) > 0)
         <div class="list_content">
             <div class="list_content_row">

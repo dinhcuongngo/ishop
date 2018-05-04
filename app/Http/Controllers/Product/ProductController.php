@@ -20,11 +20,11 @@ class ProductController extends Controller
         $this->shopRepository       = $shopRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         //
         $shops      = $this->shopRepository->listActiveShopByOwner();
-        $products   = $this->productRepository->listAllProducts();
+        $products   = $this->productRepository->searchProduct($request->name,$request->shop,$request->status);
 
         return view('products.products',['products'=>$products,'shops'=>$shops]);
     }
